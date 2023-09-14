@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source `pwd`/../.env
+CURRENT_IP=$(hostname -I | awk '{print $1}')
 
 if ! command -v glxinfo &> /dev/null
 then
@@ -23,8 +23,8 @@ if [ $vendor == "NVIDIA" ]; then
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         -env="XAUTHORITY=$XAUTH" \
         --gpus all \
-        -e ROS_MASTER_URI=$ROS_MASTER_URI \
-        -e ROS_IP=$ROS_IP \
+        -e ROS_MASTER_URI=http://$CURRENT_IP:11311 \
+        -e ROS_IP=$CURRENT_IP \
         ros_noetic_rtab:latest  \
         bash
 else
@@ -38,8 +38,8 @@ else
         --env="DISPLAY=$DISPLAY" \
         -e "TERM=xterm-256color" \
         --cap-add SYS_ADMIN --device /dev/fuse \
-        -e ROS_MASTER_URI=$ROS_MASTER_URI \
-        -e ROS_IP=$ROS_IP \
+        -e ROS_MASTER_URI=http://$CURRENT_IP:11311 \
+        -e ROS_IP=$CURRENT_IP \
         ros_noetic_rtab:latest  \
         bash
 fi
