@@ -1,0 +1,51 @@
+FROM osrf/ros:noetic-desktop-full-focal
+# The OSRF ROS Noetic containers use the root user.
+# Therefore, the following commands are executed as root up until the
+# USER user statement.
+
+# We love UTF!
+ENV LANG C.UTF-8
+
+RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
+
+RUN set -x \
+	&& apt-get update \
+	&& apt-get --with-new-pkgs upgrade -y \
+	&& apt-get install -y lsb-release \
+	&& apt-get install -y python3-pip python3-tk wget git \
+	&& pip3 install powerline-shell termcolor \
+	&& apt-get install -y ros-noetic-rtabmap-ros \
+	&& apt-get clean all \
+	&& useradd -ms /bin/bash user \
+	&& echo "user:user" | chpasswd && adduser user sudo \
+	&& echo "user ALL=(ALL) NOPASSWD: ALL " >> /etc/sudoers
+	
+
+# The OSRF contianer didn't link python3 to python, causing ROS scripts to fail.
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
+USER user
+WORKDIR /home/user
+
+RUN git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack  \
+        && git clone https://github.com/tmux-plugins/tmux-resurrect ~/.tmux-resurrect
+COPY --chown=user:user ./.tmux.conf /home/user/.tmux.conf
+COPY --chown=user:user ./.powerline.sh /home/user/.powerline.sh
+
+# Set some decent colors if the container needs to be accessed via /bin/bash.
+RUN echo LS_COLORS=$LS_COLORS:\'di=1\;33:ln=36\' >> ~/.bashrc \
+        && echo export LS_COLORS >> ~/.bashrc \
+        && echo 'source ~/.powerline.sh' >> ~/.bashrc \
+        && echo 'alias tmux="tmux -2"' >> ~/.bashrc \
+        && echo 'PATH=~/bin:$PATH' >> ~/.bashrc \
+        && touch ~/.sudo_as_admin_successful # To surpress the sudo message at run.'
+
+RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/ros/noetic/lib/x86_64-linux-gnu' >> /home/user/.bashrc
+
+RUN mkdir -p unitree_ws/src 
+RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd /home/user/unitree_ws/; catkin_make'
+RUN /bin/bash -c '. /opt/ros/noetic/setup.bash; cd /home/user/unitree_ws/; catkin_make'
+
+STOPSIGNAL SIGTERM
+
+CMD sudo service ssh start && /bin/bash
