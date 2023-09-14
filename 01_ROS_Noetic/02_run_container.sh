@@ -18,7 +18,6 @@ if [ $vendor == "NVIDIA" ]; then
         --network host \
         --env="DISPLAY" \
         -v `pwd`/../Commands/bin:/home/user/bin \
-        -v `pwd`/../Volumes/unitree_ws_src:/home/user/unitree_ws/src \
         -v `pwd`/../Data:/home/user/Data  \
         --env="QT_X11_NO_MITSHM=1" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
@@ -34,7 +33,6 @@ else
         --network host \
         --volume=/tmp/.X11-unix:/tmp/.X11-unix \
         -v `pwd`/../Commands/bin:/home/user/bin \
-        -v `pwd`/../Volumes/unitree_ws_src:/home/user/unitree_ws/src \
         -v `pwd`/../Data:/home/user/Data  \
         --device=/dev/dri:/dev/dri \
         --env="DISPLAY=$DISPLAY" \
