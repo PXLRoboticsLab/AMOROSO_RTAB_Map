@@ -19,6 +19,7 @@ if [ $vendor == "NVIDIA" ]; then
         --env="DISPLAY" \
         -v `pwd`/../Commands/bin:/home/user/bin \
         -v `pwd`/../Data:/home/user/Data  \
+        --volume=/dev:/dev \
         --env="QT_X11_NO_MITSHM=1" \
         --volume="/tmp/.X11-unix:/tmp/.X11-unix:rw" \
         -env="XAUTHORITY=$XAUTH" \
@@ -34,6 +35,7 @@ else
         --volume=/tmp/.X11-unix:/tmp/.X11-unix \
         -v `pwd`/../Commands/bin:/home/user/bin \
         -v `pwd`/../Data:/home/user/Data  \
+        --volume=/dev:/dev \
         --device=/dev/dri:/dev/dri \
         --env="DISPLAY=$DISPLAY" \
         -e "TERM=xterm-256color" \
