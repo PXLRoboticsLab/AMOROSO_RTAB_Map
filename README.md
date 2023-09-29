@@ -26,7 +26,7 @@ This repository contains Dockerfiles and scripts to run RTAB-Map using ROS Noeti
 ### Commands
 
 - `start_rtabmap_lidar_only.sh`: Starts RTAB-Map with LiDAR.
-- `start_rtabmap_stereo.sh`: Starts RTAB-Map with stereo vision.
+- `start_rtabmap_rgbd.sh`: Starts RTAB-Map with stereo vision.
 
 ### Volumes
 
