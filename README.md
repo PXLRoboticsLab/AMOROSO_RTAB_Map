@@ -58,7 +58,7 @@ Launch the robot in the ROSNoeticDocker container **with host network**
     ```
     start_turtlebot3_teleop_key.sh
     ```
-Challenge: Create a launch file to launch all the above scripts in a single command.
+Pro tip: if you want to be lazy, save some time by creating a launch file to launch all the above scripts in a single command.
 
 
 ## Advanced Usage
