@@ -58,32 +58,45 @@ Launch the robot in the ROSNoeticDocker container **with host network**
     ```
     start_turtlebot3_teleop_key.sh
     ```
-Pro tip: if you want to be lazy, save some time by creating a launch file to launch all the above scripts in a single command.
+> ⚠️ Pro tip: if you want to be lazy, save some time by creating a launch file to launch all the above scripts in a single command. 😴
 
 
-## Advanced Usage
+## RTAB-Map SLAM
 
-### Commands
-
-Start RTAB-Map with LiDAR: `start_rtabmap_lidar_only.sh`: 
+#### LiDAR:
 ```
 start_rtabmap_lidar_only.sh
 ```
-Start RTAB-Map with stereo vision: `start_rtabmap_rgbd.sh`: 
+|Parameter|Info|
+|---|---|
+|`scan_topic:=/scan`|Requires the topic on which the LiDAR data gets published|
+|`frame_id:=base_link`|Requires the frame that serves as the base reference of the robot|
+|`odom_frame_id:=odom`|Requires the frame that serves as the odometry reference of the robot|
+|`map_frame_id:=map`|Requires the frame that serves as the map reference|
+
+
+#### Camera: 
 ```
 start_rtabmap_rgbd.sh
 ```
+|Parameter|Info|
+|---|---|
+|`rgb_topic:=/camera/rgb/image_raw`|Requires the topic on which the raw RGB image is published|
+|`depth_topic:=/camera/depth/image_raw`|Requires the topic on which the depth image is published|
+|`camera_info_topic:=/camera/rgb/camera_info`|Requires the topic on which the camera info is published|
+|`imu_topic:=/imu`|Requires the topic on which the IMU data of the robot is published|
+|`odom_topic:=/odom`|Requires the topic on which the odometry data of the robot is published|
+|`frame_id:=base_link`|Requires the frame that serves as the base reference of the robot|
 
-Recommended: Read the source code of the scripts to understand what they do, what other launch scripts they invoke, what arguments they take, and how they work. This knowledge will help you debug any future issues you may encounter :nerd_face:. If you need more information on RTAB-Map, check out the [RTAB-Map ROS Wiki](http://wiki.ros.org/rtabmap_ros).
+> ⚠️ Pro tip: Read the source code of the scripts to understand what they do, what other launch scripts from other packages they invoke, what arguments they take, and how they work. This knowledge will help you debug any future issues you ~~may~~ will encounter 🤓. If you need more information on RTAB-Map, check out the [RTAB-Map ROS Wiki](http://wiki.ros.org/rtabmap_ros).
 
 
 
-## Expert Usage
+## Development
 
+### Debugging
 
-### Troubleshooting
-
-There are a lot of things that can go wrong, like, **A LOT** :upside_down_face:. Here is a list of things to try if you run into any common issues such as incorrectly configured topics or unconnected tf trees.
+There are a lot of things that can go wrong, like, **A LOT** 🙃. Here is a list of things to try ~~if~~ when you run into any common issues such as incorrectly configured topics or unconnected tf trees.
 
 - If you get an error like `ERROR: Unable to communicate with master!`, try running `source /opt/ros/noetic/setup.bash` and try again.
     ```
@@ -133,16 +146,30 @@ There are a lot of things that can go wrong, like, **A LOT** :upside_down_face:.
     ```
     rosrun tf tf_echo /frame1 /frame2
     ```
+- search for a package with `roscd package_name`
+    ```
+    roscd package_name
+    ```
 
-### Errors
 
-> `Have you tried turning it off and on again?` :monocle_face:
+### 6 golden rules for life you must recite every day before bed so you never forget  
 
-> Logs and error messages exist for a reason. :raised_eyebrow:
+> **`Have you tried turning it off and on again?`** 🧐 
 
-> If you are stuck, Google is your good ol' friend. :smirk:
+> **Logs and error messages exist for a reason.** 🤨
 
-> If you are still stuck, ChatGPT is your new bestie. :heart_eyes:
+> **If you are stuck, Google is your good ol' friend.** 😏 
+
+> **If you are still stuck, ChatGPT is your new bestie.** 😍
+
+> **If it's on the internet, it must be true! ~ Albert Einstein** 🤔
+
+>  **In case of fire:**
+```
+git add *
+git commit -m '🔥'
+git push
+```
 
 ## Volumes
 
