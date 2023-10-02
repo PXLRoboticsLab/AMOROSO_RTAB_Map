@@ -74,7 +74,7 @@ Start RTAB-Map with stereo vision: `start_rtabmap_rgbd.sh`:
 start_rtabmap_rgbd.sh
 ```
 
-Recommended: Read the source code of the scripts to understand what they do, what other launch scripts they invoke, what arguments they take, and how they work. This knowledge will help you debug any future issues you may encounter. :nerd_face:. If you need more information on RTAB-Map, check out the [RTAB-Map ROS Wiki](http://wiki.ros.org/rtabmap_ros).
+Recommended: Read the source code of the scripts to understand what they do, what other launch scripts they invoke, what arguments they take, and how they work. This knowledge will help you debug any future issues you may encounter :nerd_face:. If you need more information on RTAB-Map, check out the [RTAB-Map ROS Wiki](http://wiki.ros.org/rtabmap_ros).
 
 
 
@@ -83,7 +83,7 @@ Recommended: Read the source code of the scripts to understand what they do, wha
 
 ### Troubleshooting
 
-There are a lot of things that can go wrong, like, **A LOT**. :upside_down_face:. Here is a list of things to try if you run into any common issues such as incorrectly configured topics or unconnected tf trees.
+There are a lot of things that can go wrong, like, **A LOT** :upside_down_face:. Here is a list of things to try if you run into any common issues such as incorrectly configured topics or unconnected tf trees.
 
 - If you get an error like `ERROR: Unable to communicate with master!`, try running `source /opt/ros/noetic/setup.bash` and try again.
     ```
