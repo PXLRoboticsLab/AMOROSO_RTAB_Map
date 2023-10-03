@@ -164,7 +164,7 @@ There are a lot of things that can go wrong, like, **A LOT** 🙃. Here is a lis
 
 > **If it's on the internet, it must be true! ~ Albert Einstein** 🤔
 
-> **Use autosave and backups, unless you want to experience 1996 or losing all of your progress 1 min before deadline** 🙃
+> **Unless you want to experience 1996, Autosave and backups *will* save your job or thesis ~~if~~ *when* Word crashes 1 min before deadline** 🙃
 
 >  **In case of fire:**
 ```
